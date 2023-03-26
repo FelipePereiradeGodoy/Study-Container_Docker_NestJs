@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: project-docker-nestjs
+    image: project-docker-nestjs:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start:debug
+    ports:
+      - 3000:3000
+    networks:
+      - project-docker-nestjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+networks:
+  project-docker-nestjs-network:
